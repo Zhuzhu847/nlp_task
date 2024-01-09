@@ -1,0 +1,13 @@
+CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
+    --stage sft \
+    --do_predict \
+    --model_name_or_path /mnt/ganyang/bloomz-560m \
+    --adapter_name_or_path /mnt/ganyang/outputs/bloomz_560m_sft \
+    --dataset alpaca_gpt4_zh \
+    --template default \
+    --finetuning_type lora \
+    --output_dir /mnt/ganyang/outputs/bloomz_560m_dpo \
+    --per_device_eval_batch_size 8 \
+    --max_samples 100 \
+    --predict_with_generate \
+    --fp16

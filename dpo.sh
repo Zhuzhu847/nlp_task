@@ -1,0 +1,20 @@
+CUDA_VISIBLE_DEVICES=7 python src/train_bash.py \
+    --stage dpo \
+    --do_train \
+    --model_name_or_path /mnt/ganyang/bloomz-560m \
+    --adapter_name_or_path /mnt/ganyang/outputs/bloomz_560m_sft \
+    --create_new_adapter \
+    --dataset oaast_rm_zh \
+    --template default \
+    --finetuning_type lora \
+    --lora_target query_key_value \
+    --output_dir /mnt/ganyang/outputs/bloomz_560m_dpo_oaast \
+    --per_device_train_batch_size 1 \
+    --gradient_accumulation_steps 1 \
+    --lr_scheduler_type cosine \
+    --logging_steps 10 \
+    --save_steps 300 \
+    --learning_rate 1e-5 \
+    --num_train_epochs 1.0 \
+    --plot_loss \
+    --fp16

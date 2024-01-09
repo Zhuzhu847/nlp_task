@@ -1,0 +1,23 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 accelerate launch src/train_bash.py \
+    --stage ppo \
+    --do_train \
+    --model_name_or_path /mnt/ganyang/bloomz-560m \
+    --adapter_name_or_path /mnt/ganyang/outputs/bloomz_560m_sft \
+    --create_new_adapter \
+    --dataset alpaca_gpt4_zh \
+    --template default \
+    --finetuning_type lora \
+    --lora_target query_key_value \
+    --reward_model /mnt/ganyang/outputs/bloomz_560m_rm \
+    --output_dir /mnt/ganyang/outputs/bloomz_560m_ppo1 \
+    --per_device_train_batch_size 2 \
+    --gradient_accumulation_steps 4 \
+    --lr_scheduler_type cosine \
+    --top_k 0 \
+    --top_p 0.9 \
+    --logging_steps 10 \
+    --save_steps 500 \
+    --learning_rate 1e-5 \
+    --num_train_epochs 1.0 \
+    --plot_loss \
+    --fp16
